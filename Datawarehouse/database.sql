@@ -1,40 +1,44 @@
 CREATE TABLE IF NOT EXISTS dim_tiempo(
-    id_tiempo serial primary key not null,
+    cs_tiempo serial primary key not null,
     ano int not null,
     mes int not null,
     dia int not null
 );
 
 CREATE TABLE IF NOT EXISTS dim_empleado(
-    id_empleado serial primary key not null,
+    cs_empleado serial primary key not null,
+    id_empleado int not null,
     nombre varchar(150) not null,
     cargo varchar(20) not null
 );
 
 CREATE TABLE IF NOT EXISTS dim_cliente(
-    id_cliente serial primary key not null,
+    cs_cliente serial primary key not null,
+    id_cliente int not null,
     nombre varchar(150) not null,
     direccion varchar(150) not null 
 );
 
 CREATE TABLE IF NOT EXISTS dim_sucursal(
-    id_sucursal serial primary key not null,
+    cs_sucursal serial primary key not null,
+    id_sucursal int not null,
     nombre varchar(100) not null,
     ubicacion varchar(150) not null 
 );
 
 CREATE TABLE IF NOT EXISTS dim_producto(
-    id_producto serial primary key not null,
+    cs_producto serial primary key not null,
+    id_producto int not null,
     nombre varchar(150) not null
 );
 
 CREATE TABLE IF NOT EXISTS ventas_diarias(
-    id_tiempo int not null references dim_tiempo (id_tiempo),
-    id_empleado int not null references dim_empleado (id_empleado),
-    id_cliente int not null references dim_cliente (id_cliente),
-    id_sucursal int not null references dim_sucursal (id_sucursal),
-    id_producto int not null references dim_producto (id_producto),
+    cs_tiempo int not null references dim_tiempo (cs_tiempo),
+    cs_empleado int not null references dim_empleado (cs_empleado),
+    cs_cliente int not null references dim_cliente (cs_cliente),
+    cs_sucursal int not null references dim_sucursal (cs_sucursal),
+    cs_producto int not null references dim_producto (cs_producto),
     ventas_totales decimal (15,2) not null,
     cantidad_vendida int not null,
-    constraint pk_ventas primary key (id_sucursal,id_empleado,id_tiempo,id_cliente,id_producto) 
+    constraint pk_ventas primary key (cs_sucursal,cs_empleado,cs_tiempo,cs_cliente,cs_producto) 
 );
