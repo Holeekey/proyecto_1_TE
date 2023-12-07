@@ -7,6 +7,7 @@
       "seed": "cd database && docker-compose exec db psql -U postgres -d supermercado -f seed.sql && cd..",
       "procedures": "cd database && docker-compose exec db psql -U postgres -d supermercado -f reportsProcedures.sql && cd..",
       "drop": "cd database && docker-compose down -v && cd ..",
+      "dropdw": "cd datawarehouse && docker-compose down -v && cd ..",
       "reset": "cd database && docker-compose down -v && docker-compose up -d && cd .."
     }
 }
