@@ -724,7 +724,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
+      <xloc>1184</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -743,35 +743,27 @@
     <fields>
       <field>
         <name>cantidad_total</name>
-        <rename/>
       </field>
       <field>
         <name>precio_total</name>
-        <rename/>
       </field>
       <field>
         <name>cs_tiempo</name>
-        <rename/>
       </field>
       <field>
         <name>cs_cliente</name>
-        <rename/>
       </field>
       <field>
         <name>cs_empleado</name>
-        <rename/>
       </field>
       <field>
         <name>cs_producto</name>
-        <rename/>
       </field>
       <field>
         <name>cs_sucursal</name>
-        <rename/>
       </field>
       <field>
         <name>cs_factura</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -784,7 +776,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
+      <xloc>1008</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -918,7 +910,7 @@ FROM "public".dim_cliente
     </remotesteps>
     <GUI>
       <xloc>464</xloc>
-      <yloc>80</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1050,8 +1042,93 @@ FROM "public".dim_empleado
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>80</yloc>
+      <xloc>592</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>dim_factura</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supermercado_datawarehouse</connection>
+    <sql>SELECT
+  cs_factura
+, id_factura
+FROM "public".dim_factura
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>cs_factura</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_sucursal 2</origin>
+        <comments>cs_factura</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_factura</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_sucursal 2</origin>
+        <comments>id_factura</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1159,8 +1236,8 @@ FROM "public".dim_producto
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>80</yloc>
+      <xloc>704</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1292,8 +1369,8 @@ FROM "public".dim_sucursal
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>80</yloc>
+      <xloc>800</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1378,7 +1455,7 @@ FROM "public".dim_tiempo
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>80</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1503,7 +1580,7 @@ FROM "public".dim_tiempo
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
+      <xloc>592</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1545,7 +1622,7 @@ FROM "public".dim_tiempo
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>704</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1587,7 +1664,49 @@ FROM "public".dim_tiempo
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
+      <xloc>800</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>id_lookup 5 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_factura</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>id</name>
+        <field>id_factura</field>
+      </key>
+      <value>
+        <name>cs_factura</name>
+        <rename>cs_factura</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1820,133 +1939,6 @@ and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto
     </remotesteps>
     <GUI>
       <xloc>128</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dim_factura</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>supermercado_datawarehouse</connection>
-    <sql>SELECT
-  cs_factura
-, id_factura
-FROM "public".dim_factura
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>cs_factura</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>dim_sucursal 2</origin>
-        <comments>cs_factura</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/La_Paz</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id_factura</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>dim_sucursal 2</origin>
-        <comments>id_factura</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/La_Paz</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>id_lookup 5 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>dim_factura</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>id</name>
-        <field>id_factura</field>
-      </key>
-      <value>
-        <name>cs_factura</name>
-        <rename>cs_factura</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
