@@ -430,7 +430,7 @@
     <created_date>2023/12/06 17:02:14.311</created_date>
     <modified_user>-</modified_user>
     <modified_date>2023/12/06 17:02:14.311</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -589,227 +589,29 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>id_lookup 5</from>
-      <to>Selecciona/Renombra valores</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Selecciona/Renombra valores</from>
       <to>Insertar / Actualizar</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>dim_factura</from>
+      <to>id_lookup 5 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>id_lookup 5</from>
+      <to>id_lookup 5 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>id_lookup 5 2</from>
+      <to>Selecciona/Renombra valores</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>raw_facts</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>supermercado_database</connection>
-    <sql>select 
-f.id_empleado,
-f.id_cliente,
-f.fecha,
-df.id_producto,
-e.id_sucursal,
-sum(df.cantidad) "cantidad_total",
-sum(hp.precio * df.cantidad) "precio_total"
-from factura f, detalle_factura df, empleados e, historico_precios hp where f.id=df.id_factura and f.id_empleado=e.id
-and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto group by(f.id_empleado,f.id_cliente
-,f.fecha,df.id_producto,e.id_sucursal)
-
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id_empleado</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>raw_facts</origin>
-        <comments>id_empleado</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id_cliente</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>raw_facts</origin>
-        <comments>id_cliente</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Date</type>
-        <storagetype>normal</storagetype>
-        <name>fecha</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>raw_facts</origin>
-        <comments>fecha</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id_producto</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>raw_facts</origin>
-        <comments>id_producto</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id_sucursal</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>raw_facts</origin>
-        <comments>id_sucursal</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>cantidad_total</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>raw_facts</origin>
-        <comments>cantidad_total</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>precio_total</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>raw_facts</origin>
-        <comments>precio_total</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>dim_tiempo</name>
-    <type>TableInput</type>
+    <name>Insertar / Actualizar</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -819,65 +621,100 @@ and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto
       <schema_name/>
     </partitioning>
     <connection>supermercado_datawarehouse</connection>
-    <sql>SELECT
-  cs_tiempo,
-cast(concat(cast(ano as varchar),'/' ,cast(mes as varchar),'/', cast(dia as varchar))as date) "fecha"
-FROM "public".dim_tiempo
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>ventas_diarias</table>
+      <key>
+        <name>cantidad_total</name>
+        <field>cantidad_vendida</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>precio_total</name>
+        <field>ventas_totales</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
         <name>cs_tiempo</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>dim_tiempo</origin>
-        <comments>cs_tiempo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Date</type>
-        <storagetype>normal</storagetype>
-        <name>fecha</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>dim_tiempo</origin>
-        <comments>fecha</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+        <field>cs_tiempo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cs_cliente</name>
+        <field>cs_cliente</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cs_empleado</name>
+        <field>cs_empleado</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cs_producto</name>
+        <field>cs_producto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cs_sucursal</name>
+        <field>cs_sucursal</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cs_factura</name>
+        <field>cs_factura</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cantidad_vendida</name>
+        <rename>cantidad_total</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ventas_totales</name>
+        <rename>precio_total</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_tiempo</name>
+        <rename>cs_tiempo</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_cliente</name>
+        <rename>cs_cliente</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_empleado</name>
+        <rename>cs_empleado</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_producto</name>
+        <rename>cs_producto</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_sucursal</name>
+        <rename>cs_sucursal</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cs_factura</name>
+        <rename>cs_factura</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -887,8 +724,68 @@ FROM "public".dim_tiempo
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>80</yloc>
+      <xloc>1056</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Selecciona/Renombra valores</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>cantidad_total</name>
+        <rename/>
+      </field>
+      <field>
+        <name>precio_total</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_tiempo</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_cliente</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_empleado</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_producto</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_sucursal</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cs_factura</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1401,6 +1298,91 @@ FROM "public".dim_sucursal
     </GUI>
   </step>
   <step>
+    <name>dim_tiempo</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supermercado_datawarehouse</connection>
+    <sql>SELECT
+  cs_tiempo,
+cast(concat(cast(ano as varchar),'/' ,cast(mes as varchar),'/', cast(dia as varchar))as date) "fecha"
+FROM "public".dim_tiempo
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>cs_tiempo</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_tiempo</origin>
+        <comments>cs_tiempo</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecha</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>dim_tiempo</origin>
+        <comments>fecha</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>id_lookup</name>
     <type>StreamLookup</type>
     <description/>
@@ -1611,8 +1593,8 @@ FROM "public".dim_sucursal
     </GUI>
   </step>
   <step>
-    <name>Selecciona/Renombra valores</name>
-    <type>SelectValues</type>
+    <name>raw_facts</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1621,37 +1603,213 @@ FROM "public".dim_sucursal
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
+    <connection>supermercado_database</connection>
+    <sql>select 
+f.id_empleado,
+f.id_cliente,
+f.fecha,
+f.id,
+df.id_producto,
+e.id_sucursal,
+sum(df.cantidad) "cantidad_total",
+sum(hp.precio * df.cantidad) "precio_total"
+from factura f, detalle_factura df, empleados e, historico_precios hp where f.id=df.id_factura and f.id_empleado=e.id
+and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto group by(f.id,f.id_empleado,f.id_cliente
+,f.fecha,df.id_producto,e.id_sucursal)
+
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_empleado</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>id_empleado</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_cliente</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>id_cliente</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecha</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>raw_facts</origin>
+        <comments>fecha</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_producto</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>id_producto</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_sucursal</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>id_sucursal</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
         <name>cantidad_total</name>
-        <rename/>
-      </field>
-      <field>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>raw_facts</origin>
+        <comments>cantidad_total</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>BigNumber</type>
+        <storagetype>normal</storagetype>
         <name>precio_total</name>
-        <rename/>
-      </field>
-      <field>
-        <name>cs_tiempo</name>
-        <rename/>
-      </field>
-      <field>
-        <name>cs_cliente</name>
-        <rename/>
-      </field>
-      <field>
-        <name>cs_empleado</name>
-        <rename/>
-      </field>
-      <field>
-        <name>cs_producto</name>
-        <rename/>
-      </field>
-      <field>
-        <name>cs_sucursal</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>raw_facts</origin>
+        <comments>precio_total</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1661,14 +1819,14 @@ FROM "public".dim_sucursal
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
+      <xloc>128</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insertar / Actualizar</name>
-    <type>InsertUpdate</type>
+    <name>dim_factura</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1678,87 +1836,105 @@ FROM "public".dim_sucursal
       <schema_name/>
     </partitioning>
     <connection>supermercado_datawarehouse</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <sql>SELECT
+  cs_factura
+, id_factura
+FROM "public".dim_factura
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>cs_factura</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_sucursal 2</origin>
+        <comments>cs_factura</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_factura</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_sucursal 2</origin>
+        <comments>id_factura</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_ES</date_format_locale>
+        <date_format_timezone>America/La_Paz</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>id_lookup 5 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>dim_factura</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
     <lookup>
-      <schema>public</schema>
-      <table>ventas_diarias</table>
       <key>
-        <name>cantidad_total</name>
-        <field>cantidad_vendida</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>precio_total</name>
-        <field>ventas_totales</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cs_tiempo</name>
-        <field>cs_tiempo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cs_cliente</name>
-        <field>cs_cliente</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cs_empleado</name>
-        <field>cs_empleado</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cs_producto</name>
-        <field>cs_producto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cs_sucursal</name>
-        <field>cs_sucursal</field>
-        <condition>=</condition>
-        <name2/>
+        <name>id</name>
+        <field>id_factura</field>
       </key>
       <value>
-        <name>cantidad_vendida</name>
-        <rename>cantidad_total</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ventas_totales</name>
-        <rename>precio_total</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cs_tiempo</name>
-        <rename>cs_tiempo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cs_cliente</name>
-        <rename>cs_cliente</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cs_empleado</name>
-        <rename>cs_empleado</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cs_producto</name>
-        <rename>cs_producto</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cs_sucursal</name>
-        <rename>cs_sucursal</rename>
-        <update>Y</update>
+        <name>cs_factura</name>
+        <rename>cs_factura</rename>
+        <default/>
+        <type>Integer</type>
       </value>
     </lookup>
     <attributes/>
@@ -1770,7 +1946,7 @@ FROM "public".dim_sucursal
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>848</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
