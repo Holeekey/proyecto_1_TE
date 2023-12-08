@@ -10,20 +10,26 @@ VALUES
   ('Pasta', 'Medio kilo de pasta estilo spaghetti'),
   ('Harina PAN', 'Harina de maiz para hacer arepas y empanadas'),
   ('Tosticos', 'Hojuelas de maiz fritas'),
+  ('Natuchips', 'Hojuelas de plátano fritas'),
+  ('Doritos', 'Tostadas de maiz con polvo de sabor a queso'),
   ('Oreo', 'Galletas de chocolate y crema de vainilla'),
-  ('Coca-cola', 'Bebida azucarada efervescente'),
   ('Manzana', 'Fruta roja'),
   ('Patilla', 'Fruta gigante verde'),
+  ('Tomate', 'Fruta roja'),
   ('Escoba', 'Herramienta de limpieza'),
   ('Barra de jabon', 'Producto de limpieza personal'),
   ('Cloro', 'Producto de limpieza del hogar'),
   ('Pera', 'Fruta verde'),
-  ('Doritos', 'Tostadas de maiz con polvo de sabor a queso'),
   ('Pepsi', 'Bebida gaseosa azucarada'),
+  ('Coca-Cola', 'Bebida gaseosa azucarada'),
   ('Marilu', 'Galleta con crema relleno'),
   ('Vino Gato Negro', 'Vino tinto'),
   ('Cerveza Polar Lata', 'Polarcita en lata'),
-  ('Ron Cacique', 'Ron añejo 15 años');
+  ('Cerveza Zulia', 'Cerveza hecha en zulia de lata'),
+  ('Santa Teresa Gran Reserva', 'Ron añejo 5 años'),
+  ('Santa Teresa Linaje', 'Ron añejo 14 años'),
+  ('Santa Teresa 1796', 'Ron añejo 35 años'),
+  ('Cacique', 'Ron añejo 15 años');
 
 INSERT INTO historico_precios (id_producto, fecha_inicio, precio)
 VALUES
@@ -33,20 +39,26 @@ VALUES
   ((SELECT id FROM productos WHERE nombre = 'Pasta'), '01-21-2023', 2.5),
   ((SELECT id FROM productos WHERE nombre = 'Harina PAN'), '01-21-2023', 1.5),
   ((SELECT id FROM productos WHERE nombre = 'Tosticos'), '01-21-2023', 3.7),
+  ((SELECT id FROM productos WHERE nombre = 'Natuchips'), '01-21-2023', 4),
   ((SELECT id FROM productos WHERE nombre = 'Oreo'), '01-21-2023', 2),
-  ((SELECT id FROM productos WHERE nombre = 'Coca-cola'), '01-21-2023', 3),
+  ((SELECT id FROM productos WHERE nombre = 'Coca-Cola'), '01-21-2023', 3),
+  ((SELECT id FROM productos WHERE nombre = 'Pepsi'), '01-21-2023', 3),
   ((SELECT id FROM productos WHERE nombre = 'Manzana'), '01-21-2023', 1.5),
+  ((SELECT id FROM productos WHERE nombre = 'Tomate'), '01-21-2023', 1),
   ((SELECT id FROM productos WHERE nombre = 'Patilla'), '01-21-2023', 3),
   ((SELECT id FROM productos WHERE nombre = 'Escoba'), '01-21-2023', 8),
   ((SELECT id FROM productos WHERE nombre = 'Barra de jabon'), '01-21-2023', 1.5),
   ((SELECT id FROM productos WHERE nombre = 'Cloro'), '01-21-2023', 5),
   ((SELECT id FROM productos WHERE nombre = 'Pera'), '01-21-2023', 1.5),
   ((SELECT id FROM productos WHERE nombre = 'Doritos'), '01-21-2023', 2.7),
-  ((SELECT id FROM productos WHERE nombre = 'Pepsi'), '01-21-2023', 2.5),
   ((SELECT id FROM productos WHERE nombre = 'Marilu'), '01-21-2023', 2),
   ((SELECT id FROM productos WHERE nombre = 'Vino Gato Negro'), '01-21-2023', 5),
   ((SELECT id FROM productos WHERE nombre = 'Cerveza Polar Lata'), '01-21-2023', 0.9),
-  ((SELECT id FROM productos WHERE nombre = 'Ron Cacique'), '01-21-2023', 10);
+  ((SELECT id FROM productos WHERE nombre = 'Cerveza Zulia'), '01-21-2023', 0.9),
+  ((SELECT id FROM productos WHERE nombre = 'Santa Teresa Gran Reserva'), '01-21-2023', 8),
+  ((SELECT id FROM productos WHERE nombre = 'Santa Teresa Linaje'), '01-21-2023', 15),
+  ((SELECT id FROM productos WHERE nombre = 'Santa Teresa 1796'), '01-21-2023', 26.5),
+  ((SELECT id FROM productos WHERE nombre = 'Cacique'), '01-21-2023', 15);
 
 INSERT INTO historico_promociones (id_producto, fecha_inicio_precio, fecha_inicio, fecha_fin,descuento)
 VALUES
@@ -57,7 +69,8 @@ VALUES
   ((SELECT id FROM productos WHERE nombre = 'Harina PAN'), '01-21-2023', '05-27-2023','06-10-2023', 20),
   ((SELECT id FROM productos WHERE nombre = 'Tosticos'), '01-21-2023', '06-16-2023','06-26-2023', 5),
   ((SELECT id FROM productos WHERE nombre = 'Oreo'), '01-21-2023', '07-20-2023','07-28-2023', 15),
-  ((SELECT id FROM productos WHERE nombre = 'Coca-cola'), '01-21-2023', '10-21-2023','10-28-2023', 10);
+  ((SELECT id FROM productos WHERE nombre = 'Santa Teresa Gran Reserva'), '01-21-2023', '07-20-2023','07-28-2023', 20),
+  ((SELECT id FROM productos WHERE nombre = 'Coca-Cola'), '01-21-2023', '10-21-2023','10-28-2023', 10);
 
 INSERT INTO sucursales (direccion, id_lugar)
 VALUES
@@ -179,6 +192,12 @@ INSERT INTO clientes (datos) VALUES (check_null_datos('Javier', 'Alejandro', 'He
 INSERT INTO clientes (datos) VALUES (check_null_datos('Laura', 'Carolina', 'Pérez', 'Vargas', 'Avenida 321',  unique_cedula(format_cedula('V-9645721'),'clientes'), '555-2345'));
 INSERT INTO clientes (datos) VALUES (check_null_datos('Diego', 'Sebastián', 'Ramírez', 'Rojas', 'Calle 654',  unique_cedula(format_cedula('V-14451214'),'clientes'), '555-6789'));
 INSERT INTO clientes (datos) VALUES (check_null_datos('Valeria', 'Florencia', 'Silva', 'Luna', 'Carrera 987',  unique_cedula(format_cedula('V-13564897'),'clientes'), '555-9012'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('Andrea', 'Andres', 'Pirlo', 'Rivas', 'Tartago 10',  unique_cedula(format_cedula('V-21007896'),'clientes'), '555-9002'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('Juan','Guillermo', 'Hedderich', 'Palacios', 'La Castellana',  unique_cedula(format_cedula('V-29625836'),'clientes'), '412-3349273'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('Ana','Maria', 'Palacios', 'Urbaneja', 'La Castellana',  unique_cedula(format_cedula('V-6911402'),'clientes'), '412-2291851'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('Guillermo','de', 'Hedderich', 'Turco', 'La Castellana',  unique_cedula(format_cedula('V-10331069'),'clientes'), '412-3274866'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('El', 'Robert', 'Galarga', 'de Verdad', 'El Paraiso',  unique_cedula(format_cedula('V-6942069'),'clientes'), '412-6665965'));
+INSERT INTO clientes (datos) VALUES (check_null_datos('Elsa', 'Pato', 'Blanco', 'de Rallas', 'La Lagunita',  unique_cedula(format_cedula('V-879655'),'clientes'), '413-569874'));
 
 INSERT INTO proveedores (nombre, direccion, numero_telefonico)
 VALUES
@@ -242,7 +261,7 @@ VALUES
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'), '01-03-2023',600),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'), '01-03-2023', 500),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'), '01-03-2023', 500);
-  
+
 INSERT INTO factura (id_cliente, id_empleado, fecha, monto)
 VALUES
   (1, 1, '01-21-2023', 17),
@@ -254,7 +273,11 @@ VALUES
   (11, 13, '01-21-2023', 180.9),
   (7, 13, '01-21-2023', 20.2),
   (1, 13, '01-21-2023', 34.1),
-  (11, 13, '01-21-2023', 15);
+  (17, 7, '01-21-2023', 25),
+  (27, 7, '01-21-2023', 86),
+  (21, 1, '01-21-2023', 26),
+  (23, 3, '01-21-2023',39),
+  (25, 15, '01-21-2023', 77);
 
 
 INSERT INTO detalle_factura (id_factura, id_producto, fecha_inicio_precio, cantidad)
@@ -299,7 +322,22 @@ VALUES
   (9, 19, '01-21-2023', 4),
 
   (10, 2, '01-21-2023', 3),
-  (10, 14, '01-21-2023', 3);
+  (10, 14, '01-21-2023', 3),
+
+  (12, 13, '01-21-2023', 1),
+  (12, 1, '01-21-2023', 1),
+  (12, 2, '01-21-2023', 1),
+  (12, 14, '01-21-2023', 3),
+
+  (13, 15, '01-21-2023', 1),
+  (13, 16, '01-21-2023', 2),
+
+  (14, 2, '01-21-2023', 1),
+  (14, 14, '01-21-2023', 1),
+  (14, 5, '01-21-2023', 2),
+  (14, 6, '01-21-2023', 2),
+  (14, 7, '01-21-2023', 1),
+  (14, 13, '01-21-2023', 6);
 
 
 INSERT INTO compras_inventario (id_sucursal, id_producto)
@@ -324,6 +362,9 @@ VALUES
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),18),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),19),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),20),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),21),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),22),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Sucre'),23),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),1),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),2),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),3),
@@ -344,6 +385,9 @@ VALUES
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),18),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),19),
   ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),20),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),21),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),22),
+  ((SELECT id FROM sucursales WHERE direccion = 'Calle Urdaneta'),23),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),1),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),2),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),3),
@@ -363,7 +407,10 @@ VALUES
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),17),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),18),
   ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),19),
-  ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),20);
+  ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),20),
+  ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),21),
+  ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),22),
+  ((SELECT id FROM sucursales WHERE direccion = 'Veracruz'),23);
 
 INSERT INTO proveedores_compras_inventario (id_compra_inventario, id_proveedor, fecha, cantidad, precio_unidad, gasto_transporte)
 VALUES
@@ -428,4 +475,4 @@ VALUES
   (59, (SELECT id FROM proveedores WHERE nombre = 'Polar'), '01-21-2023', 5, 0.3, 2),
   (60, (SELECT id FROM proveedores WHERE nombre = 'Santa Teresa'), '01-21-2023', 9, 5, 4);
 
-  
+
