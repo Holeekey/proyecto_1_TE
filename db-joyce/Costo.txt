@@ -1,0 +1,37 @@
+Costo Samuel
+
+CREATE OR REPLACE function get_costo (productId int, sucursalId int) returns numeric
+as $$ 
+declare costo numeric;
+begin
+	SELECT pci.costo into costo
+	FROM compras_inventario ci JOIN proveedores_compras_inventario pci ON ci.id = pci.id_compra_inventario
+	where id_producto = productId and id_sucursal = sucursalId
+
+	if costo isnull then 
+		costo = 1;
+	end if;
+
+	return costo;
+end; 
+$$ language plpgsql;
+
+Costo Joyce
+
+CREATE OR REPLACE function get_costo (productId int, sucursalId int) returns numeric
+as $$ 
+declare costo numeric;
+begin
+	
+	SELECT d.precio_uni INTO costo
+	FROM orden_suministro os 
+		JOIN detalle_orden d ON os.id_orden_sum = d.id_orden_sum
+	WHERE d.id_producto = productId AND os.id_sucursal = sucursalId;
+
+	if costo isnull then 
+		costo = 5;
+	end if;
+
+	return costo;
+end; 
+$$ language plpgsql;
