@@ -10,6 +10,8 @@
       "dropdw": "cd datawarehouse && docker-compose down -v && cd ..",
       "reset": "cd database && docker-compose down -v && docker-compose up -d && cd ..",
       "db_joyce": "cd db-joyce && docker-compose up -d  && timeout /t 40 && docker-compose exec db psql -U postgres -d supermercado_team_joyce -f seed.sql && cd ..",
-      "reset_joyce": "cd db-joyce && docker-compose down -v && docker-compose up -d && cd .."
+      "reset_joyce": "cd db-joyce && docker-compose down -v && docker-compose up -d && cd ..",
+      "db_molina": "cd db-molina && docker-compose up -d  && timeout /t 40 && docker-compose exec db psql -U postgres -d supermercado_team_molina -f seed.sql && cd ..",
+      "reset_molina": "cd db-molina && docker-compose down -v && docker-compose up -d && cd .."
     }
 }

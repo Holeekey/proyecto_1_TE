@@ -7,34 +7,34 @@ CREATE TABLE IF NOT EXISTS dim_tiempo(
 
 CREATE TABLE IF NOT EXISTS dim_empleado(
     cs_empleado serial primary key not null,
-    id_empleado int not null,
+    id_empleado text not null,
     nombre varchar(150) not null,
     cargo varchar(20) not null
 );
 
 CREATE TABLE IF NOT EXISTS dim_cliente(
     cs_cliente serial primary key not null,
-    id_cliente int not null,
+    id_cliente text not null,
     nombre varchar(150) not null,
     direccion varchar(150) not null 
 );
 
 CREATE TABLE IF NOT EXISTS dim_sucursal(
     cs_sucursal serial primary key not null,
-    id_sucursal int not null,
+    id_sucursal text not null,
     nombre varchar(100) not null,
     ubicacion varchar(150) not null 
 );
 
 CREATE TABLE IF NOT EXISTS dim_producto(
     cs_producto serial primary key not null,
-    id_producto int not null,
+    id_producto text not null,
     nombre varchar(150) not null
 );
 
 CREATE TABLE IF NOT EXISTS dim_factura(
     cs_factura serial primary key not null,
-    id_factura int not null
+    id_factura text not null
 );
 
 CREATE TABLE IF NOT EXISTS ventas_diarias(
