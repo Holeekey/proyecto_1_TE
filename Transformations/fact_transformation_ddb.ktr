@@ -430,7 +430,7 @@
     <created_date>2024/01/01 15:37:29.915</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/01/01 15:37:29.915</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -488,7 +488,7 @@
   </connection>
   <connection>
     <name>database_joyce</name>
-    <server>localhost</server>
+    <server>192.168.1.101</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_joyce</database>
@@ -539,7 +539,7 @@
   </connection>
   <connection>
     <name>database_molina</name>
-    <server>localhost</server>
+    <server>192.168.1.101</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_molina</database>
@@ -834,31 +834,24 @@
     <fields>
       <field>
         <name>cantidad_total</name>
-        <rename/>
       </field>
       <field>
         <name>precio_total</name>
-        <rename/>
       </field>
       <field>
         <name>cs_tiempo</name>
-        <rename/>
       </field>
       <field>
         <name>cs_cliente</name>
-        <rename/>
       </field>
       <field>
         <name>cs_producto</name>
-        <rename/>
       </field>
       <field>
         <name>cs_sucursal</name>
-        <rename/>
       </field>
       <field>
         <name>cs_factura</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>

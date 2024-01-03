@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS dim_cliente(
     cs_cliente serial primary key not null,
     id_cliente text not null,
     nombre varchar(150) not null,
-    direccion varchar(150) not null 
+    direccion varchar(150) not null,
+    edad int not null
 );
 
 CREATE TABLE IF NOT EXISTS dim_sucursal(

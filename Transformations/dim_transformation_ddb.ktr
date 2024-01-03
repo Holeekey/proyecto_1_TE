@@ -539,7 +539,7 @@
   </connection>
   <connection>
     <name>supermercado_team_joyce</name>
-    <server>localhost</server>
+    <server>192.168.1.101</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_joyce</database>
@@ -590,7 +590,7 @@
   </connection>
   <connection>
     <name>supermercado_team_molina</name>
-    <server>localhost</server>
+    <server>192.168.1.101</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_molina</database>
@@ -641,11 +641,6 @@
   </connection>
   <order>
     <hop>
-      <from>dim_cliente_in</from>
-      <to>Inserts dim_cliente</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>dim_factura_in</from>
       <to>Inserts dim_factura</to>
       <enabled>Y</enabled>
@@ -658,11 +653,6 @@
     <hop>
       <from>dim_tiempo_in</from>
       <to>Inserts dim_tiempo</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>dim_cliente_in t_joyce</from>
-      <to>Inserts dim_cliente</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -701,11 +691,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>dim_cliente_in t_molina</from>
-      <to>Inserts dim_cliente</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>dim_tiempo_in t_molina</from>
       <to>Inserts dim_tiempo</to>
       <enabled>Y</enabled>
@@ -725,6 +710,61 @@
       <to>Inserts dim_factura</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>dim_cliente_in</from>
+      <to>Replace in string 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_cliente_in t_molina</from>
+      <to>Replace in string 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>dim_cliente_in t_joyce</from>
+      <to>Inserts dim_cliente</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Replace in string 2</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Modified JavaScript value 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Replace in string 2 2</from>
+      <to>Select values 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2 2</from>
+      <to>Modified JavaScript value 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified JavaScript value 2 2 2</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Inserts dim_cliente</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified JavaScript value 2 2</from>
+      <to>Select values 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 3</from>
+      <to>Inserts dim_cliente</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Inserts dim_cliente</name>
@@ -739,7 +779,7 @@
     </partitioning>
     <connection>supermercado_datawarehouse</connection>
     <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema>public</schema>
       <table>dim_cliente</table>
@@ -761,6 +801,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>edad</name>
+        <field>edad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>id_cliente</name>
         <rename>id</rename>
@@ -776,6 +822,11 @@
         <rename>direccion</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>edad</name>
+        <rename>edad</rename>
+        <update>Y</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -786,7 +837,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>880</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1019,6 +1070,52 @@
     </GUI>
   </step>
   <step>
+    <name>Modified JavaScript value 2 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>Y</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var edad = 2024 - floor(0.0000017 * (ci) + 1952);
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>edad</name>
+        <rename>edad</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Replace in string</name>
     <type>ReplaceString</type>
     <description/>
@@ -1054,6 +1151,84 @@
     <GUI>
       <xloc>752</xloc>
       <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string 2</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>ci</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>V-</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string 2 2</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>ci</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>V-</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1101,7 +1276,7 @@
     <sql>SELECT distinct
 id::TEXT,
 concat((datos).nombre1,' ',(datos).apellido1,' ',coalesce((datos).nombre2,''),' ',(datos).apellido2) "nombre",
-(datos).direccion
+(datos).direccion, (datos).cedula_identidad "ci"
 FROM "public".clientes
 </sql>
     <limit>0</limit>
@@ -1180,6 +1355,29 @@ FROM "public".clientes
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ci</name>
+        <length>10</length>
+        <precision>-1</precision>
+        <origin>dim_cliente_in</origin>
+        <comments>ci</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1209,7 +1407,7 @@ FROM "public".clientes
     <connection>supermercado_team_joyce</connection>
     <sql>SELECT
 id_cliente::TEXT "id",
-concat(primer_nombre,' ',primer_apellido) "nombre", direccion
+concat(primer_nombre,' ',primer_apellido) "nombre", direccion, (EXTRACT(YEAR FROM NOW()) - EXTRACT(YEAR FROM fecha_nac))::INT "edad"
 FROM "public".cliente
 </sql>
     <limit>0</limit>
@@ -1288,6 +1486,29 @@ FROM "public".cliente
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>edad</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>dim_cliente_in t_joyce</origin>
+        <comments>edad</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1318,7 +1539,7 @@ FROM "public".cliente
     <sql>SELECT distinct
 id::TEXT "id",
 concat((data).first_name,' ',(data).last_name,' ',coalesce((data).middle_name,''),' ',(data).family_name) "nombre",
-(data).address "direccion"
+(data).address "direccion", (data).ci
 FROM "public"."Client"
 </sql>
     <limit>0</limit>
@@ -1382,6 +1603,29 @@ FROM "public"."Client"
         <precision>-1</precision>
         <origin>dim_cliente_in t_molina</origin>
         <comments>direccion</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>ci</name>
+        <length>256</length>
+        <precision>-1</precision>
+        <origin>dim_cliente_in t_molina</origin>
+        <comments>ci</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1860,10 +2104,10 @@ FROM "public"."Product"</sql>
     <connection>supermercado</connection>
     <sql>SELECT distinct
 id::TEXT,
-concat('suc-',id) "nombre",
+concat('suc-','B') "nombre",
 direccion "ubicacion"
 FROM "public".sucursales
-</sql>
+WHERE id = 1;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1880,8 +2124,8 @@ FROM "public".sucursales
         <origin>dim_sucursal_in</origin>
         <comments>id</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1890,7 +2134,7 @@ FROM "public".sucursales
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1903,8 +2147,8 @@ FROM "public".sucursales
         <origin>dim_sucursal_in</origin>
         <comments>nombre</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1913,7 +2157,7 @@ FROM "public".sucursales
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1926,8 +2170,8 @@ FROM "public".sucursales
         <origin>dim_sucursal_in</origin>
         <comments>ubicacion</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1936,7 +2180,7 @@ FROM "public".sucursales
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -1969,9 +2213,9 @@ FROM "public".sucursales
     <connection>supermercado_team_joyce</connection>
     <sql>SELECT distinct
 id_sucursal::TEXT "id",
-concat('suc-',2) "nombre",
+concat('suc-','J') "nombre",
 direccion "ubicacion"
-FROM "public".sucursal 
+FROM "public".sucursal where id_sucursal = 1
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1989,8 +2233,8 @@ FROM "public".sucursal
         <origin>dim_sucursal_in t_joyce</origin>
         <comments>id</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -1999,7 +2243,7 @@ FROM "public".sucursal
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2012,8 +2256,8 @@ FROM "public".sucursal
         <origin>dim_sucursal_in t_joyce</origin>
         <comments>nombre</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2022,7 +2266,7 @@ FROM "public".sucursal
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2035,8 +2279,8 @@ FROM "public".sucursal
         <origin>dim_sucursal_in t_joyce</origin>
         <comments>ubicacion</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2045,7 +2289,7 @@ FROM "public".sucursal
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2078,10 +2322,9 @@ FROM "public".sucursal
     <connection>supermercado_team_molina</connection>
     <sql>SELECT distinct
 id::TEXT "id",
-concat('suc-',3) "nombre",
+concat('suc-','M') "nombre",
 address_line_1 "ubicacion"
-FROM "public"."Branch" 
-</sql>
+FROM "public"."Branch" where address_line_1 ='1233 Cypress Lane'</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2098,8 +2341,8 @@ FROM "public"."Branch"
         <origin>dim_sucursal_in t_molina</origin>
         <comments>id</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2108,7 +2351,7 @@ FROM "public"."Branch"
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2121,8 +2364,8 @@ FROM "public"."Branch"
         <origin>dim_sucursal_in t_molina</origin>
         <comments>nombre</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2131,7 +2374,7 @@ FROM "public"."Branch"
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2144,8 +2387,8 @@ FROM "public"."Branch"
         <origin>dim_sucursal_in t_molina</origin>
         <comments>ubicacion</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2154,7 +2397,7 @@ FROM "public"."Branch"
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>en_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2494,6 +2737,204 @@ FROM "public"."Order" o</sql>
     </remotesteps>
     <GUI>
       <xloc>1248</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value 2 2 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>Y</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var edad = 2024 - floor(0.0000017 * (ci) + 1952);
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>edad</name>
+        <rename>edad</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>ci</name>
+        <rename>ci</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>ci</name>
+        <rename>ci</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>ci</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>ci</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
