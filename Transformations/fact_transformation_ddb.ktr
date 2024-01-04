@@ -1645,7 +1645,7 @@ e.id_sucursal::text,
 sum(df.cantidad) "cantidad_total",
 sum(hp.precio * df.cantidad) "precio_total"
 from factura f, detalle_factura df, empleados e, historico_precios hp where f.id=df.id_factura and f.id_empleado=e.id
-and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto and e.id_sucursal = 1 group by(f.id,f.id_cliente
+and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto and e.id_sucursal = 2 group by(f.id,f.id_cliente
 ,f.fecha,df.id_producto,e.id_sucursal)
 
 

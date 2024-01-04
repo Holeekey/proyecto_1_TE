@@ -2305,7 +2305,7 @@ id::TEXT,
 concat('suc-','B') "nombre",
 direccion "ubicacion"
 FROM "public".sucursales
-WHERE id = 1;</sql>
+WHERE id = 2;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2322,8 +2322,8 @@ WHERE id = 1;</sql>
         <origin>dim_sucursal_in</origin>
         <comments>id</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2332,7 +2332,7 @@ WHERE id = 1;</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2345,8 +2345,8 @@ WHERE id = 1;</sql>
         <origin>dim_sucursal_in</origin>
         <comments>nombre</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2355,7 +2355,7 @@ WHERE id = 1;</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -2368,8 +2368,8 @@ WHERE id = 1;</sql>
         <origin>dim_sucursal_in</origin>
         <comments>ubicacion</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -2378,7 +2378,7 @@ WHERE id = 1;</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
+        <date_format_locale>es_ES</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
