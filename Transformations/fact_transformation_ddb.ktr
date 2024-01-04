@@ -488,7 +488,7 @@
   </connection>
   <connection>
     <name>database_joyce</name>
-    <server>192.168.1.101</server>
+    <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_joyce</database>
@@ -539,7 +539,7 @@
   </connection>
   <connection>
     <name>database_molina</name>
-    <server>192.168.1.101</server>
+    <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>supermercado_team_molina</database>
@@ -1645,7 +1645,7 @@ e.id_sucursal::text,
 sum(df.cantidad) "cantidad_total",
 sum(hp.precio * df.cantidad) "precio_total"
 from factura f, detalle_factura df, empleados e, historico_precios hp where f.id=df.id_factura and f.id_empleado=e.id
-and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto group by(f.id,f.id_cliente
+and df.fecha_inicio_precio = hp.fecha_inicio and df.id_producto = hp.id_producto and e.id_sucursal = 1 group by(f.id,f.id_cliente
 ,f.fecha,df.id_producto,e.id_sucursal)
 
 
@@ -1851,10 +1851,10 @@ f.id_cliente::text,
 f.id_factura::text "id",
 hpv.id_producto::text "id_producto",
 f.id_sucursal::text,
-coalesce (sum(df.cantidad_producto),0) "cantidad_total",
+coalesce (sum(df.cantidad_producto),1) "cantidad_total",
 sum(hpv.monto * df.cantidad_producto) "precio_total"
 from factura f, detalle_factura df, hist_precio_venta hpv where f.id_factura =df.id_factura 
-and hpv.fecha_inicio = df.fecha_inicio and hpv.id_producto is not null group by(f.id_factura ,f.id_cliente
+and hpv.fecha_inicio = df.fecha_inicio and hpv.id_producto is not null and f.id_sucursal = 1 group by(f.id_factura ,f.id_cliente
 ,(f.gasto_factura).fecha,"id_producto",f.id_sucursal)
 
 
@@ -2062,7 +2062,7 @@ op."productId"::text "id_producto",
 o.branch::text "id_sucursal",
 sum(op.quantity)::int "cantidad_total",
 sum(p.price * op.quantity) "precio_total"
-from "Order" o, "OrderProduct" op, "Product" p where o.id=op."orderId" and op."productId"=p.id group by (o.id,"id_cliente"
+from "Order" o, "OrderProduct" op, "Product" p, "Branch" b where o.id=op."orderId" and op."productId"=p.id and b.id=o.branch and b.address_line_1 ='1233 Cypress Lane' group by (o.id,"id_cliente"
 ,"fecha","id_producto","id_sucursal") 
 
 </sql>
