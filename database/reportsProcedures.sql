@@ -19,6 +19,21 @@ begin
 	return gastos;
 
 end; $$ language plpgsql;
+CREATE OR REPLACE function get_costo (productId int, sucursalId int) returns numeric
+as $$ 
+declare costo numeric;
+begin
+	SELECT pci.precio_unidad  into costo
+	FROM compras_inventario ci JOIN proveedores_compras_inventario pci ON ci.id = pci.id_compra_inventario
+	where id_producto = productId and id_sucursal = sucursalId;
+
+	if costo isnull then 
+		costo = 1;
+	end if;
+
+	return costo;
+end; 
+$$ language plpgsql;
 
 create or replace function ganancias_mes (sucursal int, fecha_reporte date) returns decimal(12,2)
 as $$

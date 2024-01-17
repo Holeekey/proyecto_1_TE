@@ -488,13 +488,13 @@
   </connection>
   <connection>
     <name>database_joyce</name>
-    <server>localhost</server>
+    <server>10.12.9.12</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>supermercado_team_joyce</database>
-    <port>4200</port>
+    <database>supermercadoTDA</database>
+    <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+    <password>Encrypted 2be98afc86aa7f2e4a116b773dbc3fd89</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -513,7 +513,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>4200</attribute>
+        <attribute>5432</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -539,13 +539,13 @@
   </connection>
   <connection>
     <name>database_molina</name>
-    <server>localhost</server>
+    <server>10.12.9.13</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>supermercado_team_molina</database>
-    <port>4300</port>
+    <database>supermarket</database>
+    <port>4000</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb18bd63c99dbdde</password>
+    <password>Encrypted 2be98afc86ad48794ae0ba371cc99aace</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -564,7 +564,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>4300</attribute>
+        <attribute>4000</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
